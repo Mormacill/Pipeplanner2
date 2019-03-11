@@ -51,7 +51,7 @@ cout << "Bitte wählen sie Ihr erstes Streckensegment aus!" << endl << endl;
 
 cin >> w_seg;
 
-if (w_seg = 1)
+if (w_seg == 1)
 	{
 	cout << "*Segment Rohreinlauf*" << endl << endl;
 	cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
@@ -64,15 +64,15 @@ if (w_seg = 1)
 	cout << "6: Fall 6" << endl << endl;
 	cin >> w_fall;
 
-	if (w_fall = 1)
+	if (w_fall == 1)
 		{
 		cout << endl << endl << "Ist der Einlauf scharfkantig (1) oder gebrochen (2)?" << endl << endl;
 		cin >> w_individual;
-		if (w_individual = 1)
+		if (w_individual == 1)
 			{
 			zeta = 0.5;
 			}
-		if (w_individual = 2)
+		if (w_individual == 2)
 			{
 			zeta = 0.25;
 			}
@@ -83,18 +83,18 @@ if (w_seg = 1)
 		{
 		cout << endl << endl << "Ist der Einlauf scharfkantig (1) oder gebrochen (2)?" << endl << endl;
 		cin >> w_individual;
-                if (w_individual = 1)
+                if (w_individual == 1)
                         {
                         zeta = 3;
                         }
-                if (w_individual = 2)
+                if (w_individual == 2)
                         {
                         zeta = 0.8;
                         }
 		cout << "Für die Rechnung wird ein Zeta-Wert von " << zeta << " verwendet" << endl << endl;
 		}
 
-	if (w_fall = 4)
+	if (w_fall == 4)
 		{
 		cout << endl << endl << "Bitte geben Sie den Knickwinkel delta (in Grad) des Einlaufs an" << endl << endl;
 		cin >> einl_delta;
@@ -103,7 +103,7 @@ if (w_seg = 1)
 		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
 		}
 
-	if (w_fall = 5)
+	if (w_fall == 5)
 		{
 		cout << endl << endl << "Bitte geben Sie das Verhältniss vom Einlaufradius zum Rohrdurchmesser R/d an" << endl << endl;
 		cin >> Rd;
@@ -118,7 +118,7 @@ if (w_seg = 1)
 		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
 		}
 
-	if (w_fall = 6)
+	if (w_fall == 6)
 		{
 		cout << endl << endl << "Bitte geben Sie das quadrierte Verhältnis vom Rohrdurchmesser zum Einlaufdurchmesser (d/de)^2 an" << endl << endl;
 		cin >> dde;
