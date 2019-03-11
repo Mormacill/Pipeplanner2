@@ -1,5 +1,5 @@
-#ifndef RFF_H
-#define RFF_H
+#ifndef FUNKTIONEN_H
+#define FUNKTIONEN_H
 
 double Dichte (double T, double p);
 
