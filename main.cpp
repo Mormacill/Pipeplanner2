@@ -143,11 +143,13 @@ if (w_seg == 1)
 	cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
 	}
 
-/*if (w_seg == 2)
+if (w_seg == 2)
 	{
-
+	cout << "*Segment Rohrauslauf*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	
 	}
-*/
+
 
 
 
@@ -176,7 +178,4 @@ for (i=0; i<n_seg; i++)
 cout << Druckarray[i] << endl;
 }
 */
-
-
-
 }
