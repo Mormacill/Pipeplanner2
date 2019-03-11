@@ -18,6 +18,11 @@ double zeta;
 double einl_delta;
 double Rd;
 double dde;
+double T;
+double p;
+double Rho;
+double w;
+double pv;
 
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
@@ -125,6 +130,17 @@ if (w_seg == 1)
 		zeta = 0.0059 * pow(dde,4) - 0.1132 * pow(dde,3) + 3.4345 * pow(dde,2) -4.6504 * dde + 1.8231;  //Funktion aus polynomischer Regression von Tabellenwerten (s.S. 182 Bohl, 14. Auflage)
 		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
 		}
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+	cin >> T;
+	T = T + 273.15; //Umrechnung Celsius zu Kelvin
+	cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+	cin >> p;
+	p = p * 100000; //Umrechnung Bar zu Pascal
+	Rho = Dichte(T,p);
+	cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) im Einlauf an" << endl << endl;
+	cin >> w;
+	pv = p_v (zeta, Rho, w);
+	cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
 	}
 
 /*if (w_seg == 2)
