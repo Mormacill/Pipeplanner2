@@ -283,7 +283,7 @@ if (w_seg == 3)
 
 if (w_seg == 4)
         {
-        cout << "*Segment plötzliche Rohrerweiterung*" << endl << endl;
+        cout << "*Segment Diffusor*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
 	}
 
