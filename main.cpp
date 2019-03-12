@@ -28,7 +28,7 @@ double kin_vis;
 double d;
 double n;
 double d_duse;
-
+double d1, d2;
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
 cout << "Bitte geben Sie an, aus wie vielen Segmenten Ihre Rohrstrecke besteht" << endl << endl;
@@ -235,15 +235,57 @@ if (w_seg == 2)
 		}	*/
 	}
 
-if (w_seg == 2)
+if (w_seg == 3)
         {
         cout << "*Segment plötzliche Rohrerweiterung*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
-	
+	cout << "Möchte Sie die Berechnung des Zeta-Wertes auf den Eintritts- (1) oder den Austrittsquerschnitt (2) beziehen?" << endl << endl;
+	cin >> w_individual;
+        	if (w_individual == 1)
+        		{
+			cout << "Bitte geben Sie den Eintrittsdurchmesser d1 (m) an" << endl << endl;
+			cin >> d1;
+			cout << endl << endl << "Bitte geben Sie den Austrittsdurchmesser d2 (m) an" << endl << endl;
+                        cin >> d2;
+                        zeta = pow((1 - pow((d1 / d2),2)),2);
+			cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        		cin >> T;
+        		T = T + 273.15; //Umrechnung Celsius zu Kelvin
+       			cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        		cin >> p;
+        		p = p * 100000; //Umrechnung Bar zu Pascal
+        		Rho = Dichte(T,p);
+        		cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) im Eintrittsquerschnitt an" << endl << endl;
+        		cin >> w;
+        		pv = p_v (zeta, Rho, w);
+        		cout << endl << endl << "Der Druckverlust infolge von Reibung für die auf den Eintrittsquerschnitt bezogene plötzliche Rohrerweiterung beträgt: " << pv << " Pascal" << endl << endl;
+                 	}
+                if (w_individual == 2)
+                        {
+			cout << "Bitte geben Sie den Eintrittsdurchmesser d1 (m) an" << endl << endl;
+                        cin >> d1;
+                        cout << endl << endl << "Bitte geben Sie den Austrittsdurchmesser d2 (m) an" << endl << endl;
+                        cin >> d2;
+                        zeta = pow((pow((d2 / d1),2) - 1),2);
+			cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+                        cin >> T;
+                        T = T + 273.15; //Umrechnung Celsius zu Kelvin
+                        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+                        cin >> p;
+                        p = p * 100000; //Umrechnung Bar zu Pascal
+                        Rho = Dichte(T,p);
+                        cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) im Austrittsquerschnitt an" << endl << endl;
+                        cin >> w;
+                        pv = p_v (zeta, Rho, w);
+                        cout << endl << endl << "Der Druckverlust infolge von Reibung für die auf den Austrittsquerschnitt bezogene plötzliche Rohrerweiterung beträgt: " << pv << " Pascal" << endl << endl;
+                        }
 	}
 
-
-
+if (w_seg == 4)
+        {
+        cout << "*Segment plötzliche Rohrerweiterung*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	}
 
 
 
