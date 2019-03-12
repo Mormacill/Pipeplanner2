@@ -23,6 +23,11 @@ double p;
 double Rho;
 double w;
 double pv;
+double Rey;
+double kin_vis;
+double d;
+double n;
+double d_duse;
 
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
@@ -136,7 +141,7 @@ if (w_seg == 1)
 	cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
 	cin >> p;
 	p = p * 100000; //Umrechnung Bar zu Pascal
-	Rho = Dichte(T,p);
+ 	Rho = Dichte(T,p);
 	cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) im Einlauf an" << endl << endl;
 	cin >> w;
 	pv = p_v (zeta, Rho, w);
@@ -147,8 +152,97 @@ if (w_seg == 2)
 	{
 	cout << "*Segment Rohrauslauf*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "Welcher Rohrauslauf liegt vor?" << endl << endl << endl;
+        cout << "1: Fall 1" << endl;
+        cout << "2: Fall 2" << endl;
+        cout << "3: Fall 3" << endl;
+        cout << "4: Fall 4" << endl;
+ //     cout << "5: Fall 5" << endl;
+	cin >> w_fall;
+
+	if (w_fall == 1)
+		{
+		zeta = 1;
+		cout << endl << endl << "Für die Rechnung wird ein Zeta-Wert von " << zeta << " verwendet" << endl << endl;
+		}
+
+	if (w_fall == 2)
+		{
+		cout << endl << endl << "Liegt ein runder oder quadratischer (1) oder ein rechteckiger (2) Strömungquerschnitt vor?" << endl << endl;
+		cin >> w_individual;
+		if (w_individual == 1)
+                        {
+                        zeta = 2;
+                        }
+                if (w_individual == 2)
+                        {
+                        zeta = 1.55;
+                        }
+                cout << endl << endl << "Für die Rechnung wird ein Zeta-Wert von " << zeta << " verwendet" << endl << endl;
+		}
+
+	if (w_fall == 3)
+		{
+		cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
+        	cin >> T;
+        	kin_vis = vis(T);
+		kin_vis = kin_vis * pow(10,-7);
+		cout << endl << endl << "Bitte geben sie die Strömungsgeschwindigkeit (m/s) im Auslauf an" << endl << endl;
+		cin >> w;
+		cout << endl << endl << "Bitte geben Sie den (hydraulischen) Durchmesser (m) des Rohres an" << endl << endl;
+		cin >> d;
+		Rey = Re(w,kin_vis,d);
+		n = n_exp(Rey);
+		cout << endl << endl << "Liegt ein runder oder quadratischer (1) oder ein rechteckiger (2) Strömungquerschnitt vor?" << endl << endl;
+		cin >> w_individual;
+                if (w_individual == 1)
+                        {
+                        zeta = (pow(((2 * n) + 1),3) * pow((n + 1),3)) / (4 * pow(n,4) * ((2 * n) + 3) * (n + 3));
+                        }
+                if (w_individual == 2)
+                        {
+                        zeta = (pow((n + 1),3)) / (pow(n,2) * (n + 3));
+                        }
+		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
+		}
+
+
+	if (w_fall == 4)
+		{
+		cout << "Bitte geben Sie den Rohrdurchmesser (m) an" << endl << endl;
+		cin >> d;
+		cout << endl << endl << "Bitte geben Sie den Düsendurchmesser (m) an" << endl << endl;
+		cin >> d_duse;
+		zeta = pow((d / d_duse),4);
+		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
+		}
+
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        cin >> T;
+        T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cin >> p;
+        p = p * 100000; //Umrechnung Bar zu Pascal
+        Rho = Dichte(T,p);
+        cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) im Einlauf an" << endl << endl;
+        cin >> w;
+        pv = p_v (zeta, Rho, w);
+        cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
+
+/*	if (w_fall == 5)
+		{
+
+		}	*/
+	}
+
+if (w_seg == 2)
+        {
+        cout << "*Segment plötzliche Rohrerweiterung*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
 	
 	}
+
+
 
 
 
