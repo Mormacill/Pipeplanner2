@@ -29,6 +29,13 @@ double d;
 double n;
 double d_duse;
 double d1, d2;
+double lambda;
+double a1, a2;
+double phi;
+double zeta_E, zeta_R;
+double h1;
+double b;
+
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
 cout << "Bitte geben Sie an, aus wie vielen Segmenten Ihre Rohrstrecke besteht" << endl << endl;
@@ -285,33 +292,100 @@ if (w_seg == 4)
         {
         cout << "*Segment Diffusor*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
+        cin >> T;
+        kin_vis = vis(T);
+        kin_vis = kin_vis * pow(10,-7);
+        cout << endl << endl << "Bitte geben sie die Strömungsgeschwindigkeit (m/s) im Einlauf an" << endl << endl;
+        cin >> w;
+        cout << endl << endl << "Bitte geben Sie den (hydraulischen) Durchmesser (m) des Einlaufes an" << endl << endl;
+        cin >> d1;
+	cout << endl << endl;
+        Rey = Re(w,kin_vis,d1);
+
+	if (Rey < 2300)
+		{
+		lambda = 64 / Rey; //laminare Strömung
+		}
+	else
+		{
+		//SOLVER FÜR LAMBDA IM TURBULENTEN BEREICH NACH PRANDTL/KARMAN
+		long double y_ceil = 1;
+		long double y_floor = 0;
+		long double eq = 1;
+		long double y = 0;
+		long double epsilon = 1e-10;
+
+		while (fabs(eq) > epsilon)
+        		{
+        		y = y_floor + (y_ceil - y_floor) / 2;
+        		cout << y << endl;
+        		eq = Karman_r (Rey,y);
+                		if (eq < 0)
+                			{
+                			y_ceil = y;
+                			}
+                		else
+                			{
+                			y_floor = y;
+                			}
+        		}
+		lambda = y;
+		cout << endl << endl << "Der Rohrreibungsbeiwert Lambda wurde iterativ ermittelt und liegt bei " << lambda << endl << endl;
+		}
+	a1 = (M_PI / 4) * pow(d1,2);
+	cout << endl << endl << "Bitte geben Sie den (hydraulischen) Durchmesser (m) des Austritts an" << endl << endl;
+	cin >> d2;
+	a2 = (M_PI / 4) * pow(d2,2);
+	cout << endl << endl << "Liegt ein Kreisdiffusor (1), ein Rechteckdiffusor (2) oder ein Flachdiffusor (3) vor?" << endl << endl;
+	cin >> w_fall;
+	if (w_fall == 1)
+		{
+		cout << endl << endl << "Bitte geben Sie den Öffnungswinkel des Kreisdiffusors an (Gültigkeitsbereich 0 - 40°)" << endl << endl;
+		cin >> phi;
+		zeta_E = 3.2 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
+		zeta_R = (lambda / (8 * sin(phi/2))) * (1 - pow((a1 / a2),2));
+		zeta = zeta_E + zeta_R;
+		}
+	if (w_fall == 2)
+		{
+		cout << endl << endl << "Bitte geben Sie den Öffnungswinkel des Rechteckdiffusors an (Gültigkeitsbereich 0 - 25°)" << endl << endl;
+                cin >> phi;
+                zeta_E = 4 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
+                zeta_R = (lambda / (16 * sin(phi/2))) * (1 - pow((a1 / a2),2));
+                zeta = zeta_E + zeta_R;
+		}
+	if (w_fall == 3)
+		{
+		cout << endl << endl << "Bitte geben Sie den Öffnungswinkel des Flachdiffusors an (Gültigkeitsbereich 0 - 40°)" << endl << endl;
+                cin >> phi;
+		cout << endl << endl << "Bitte geben Sie die Diffusorhöhe (m) am Eintritt an" << endl << endl;
+		cin >> h1;
+		cout << endl << endl << "Bitte geben Sie die Diffusorbreite (m) an" << endl << endl;
+                cin >> b;
+                zeta_E = 3.2 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
+                zeta_R = (lambda / (4 * sin(phi/2))) * ((h1 / b) * (1 - (a1 / a2)) + 0.5 * (1 - pow((a1 / a2),2)));
+                zeta = zeta_E + zeta_R;
+		}
+
+	T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums am Diffusoreintritt ein" << endl << endl;
+        cin >> p;
+        p = p * 100000; //Umrechnung Bar zu Pascal
+        Rho = Dichte(T,p);
+        pv = p_v (zeta, Rho, w);
+        cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
+	} //Ende seg 4
+
+if (w_seg == 5)
+        {
+        cout << "*Segment Konfusor*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
 	}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*int i;
-
-for (i=0; i<n_seg; i++)
-{
-  Druckarray[i] = 2;
-}
-
-for (i=0; i<n_seg; i++)
-{
-cout << Druckarray[i] << endl;
-}
-*/
-}
+} //Ende main

@@ -11,4 +11,6 @@ double vis (double T);
 
 double n_exp (double Rey);
 
+long double Karman_r (long double x, long double y);
+
 #endif

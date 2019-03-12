@@ -25,3 +25,9 @@ double n_exp (double Rey)
 {
 return 3.6182 * pow(Rey,0.0611);
 }
+
+long double Karman_r (long double x, long double y)
+{
+//So umgestellt, dass linke Seite = 0
+return (1 / pow((2 * log10(x * (sqrt(y)/2.51))),2)) - y;
+}
