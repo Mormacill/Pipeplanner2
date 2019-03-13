@@ -29,7 +29,7 @@ double d;
 double n;
 double d_duse;
 double d1, d2;
-double lambda;
+long double lambda;
 double a1, a2;
 double phi;
 double zeta_E, zeta_R;
@@ -38,6 +38,8 @@ double b;
 double theta;
 double n_wellen;
 double a;
+double w1, w2;
+double l;
 
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
@@ -61,7 +63,7 @@ cout << "6: plötzliche Rohrverengung" << endl << endl;
 //cout << "7: Krümmer" << endl << endl;
 cout << "8: Kniestück" << endl << endl;
 cout << "9: Kompensatoren / Dehnungsausgleicher" << endl << endl;
-cout << "10: Regelarmatur" << endl << endl;
+cout << "10: Regler / Drosselklappe" << endl << endl;
 cout << "11: gerader Rohrabschnitt" << endl << endl << endl;
 
 
@@ -294,7 +296,6 @@ if (w_seg == 4)
         {
         cout << "*Segment Diffusor*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
-
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
         cin >> T;
         kin_vis = vis(T);
@@ -439,7 +440,7 @@ if (w_seg == 8)
 
 if (w_seg == 9)
 	{
-	cout << "*Segment Kompensatoren / Dehnungsausgleicher*" << endl << endl;
+	cout << "*Segment Kompensator / Dehnungsausgleicher*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
 	cout << "Bitte geben Sie den Kompensatortyp an" << endl << endl;
 	cout << "1: Stopfbuchskompensator" << endl;
@@ -527,7 +528,61 @@ if (w_seg == 9)
 
 if (w_seg == 10)
 	{
-	
+	cout << "*Segment Regler / Drosselklappe*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        cin >> T;
+        T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cin >> p;
+        p = p * 100000; //Umrechnung Bar zu Pascal
+        Rho = Dichte(T,p);
+	cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) am Eintritt an" << endl << endl;
+        cin >> w1;
+	cout << endl << endl << "Bitte geben Sie den Durchmesser (m) am Eintritt an" << endl << endl;
+	cin >> d1;
+	a1 = (M_PI / 4) * pow(d1,2);
+	cout << endl << endl << "Bitte geben Sie bei gewünschter Stellung der Drosselklappe die versperrte Fläche an" << endl << endl;
+	cin >> a2;
+	a2 = a1 - a2;
+	w2 = w1 * (a1 / a2);
+	pv = (Rho / 2) * pow((w1 - w2),2);
+	cout << endl << endl << "Der Druckverlust infolge von Versperrung für das Drosselelement beträgt: " << pv << " Pascal" << endl << endl;
+	}
+
+if (w_seg == 11)
+	{
+	cout << "*Segment gerades Rohr*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
+        cin >> T;
+        kin_vis = vis(T);
+        kin_vis = kin_vis * pow(10,-7);
+        cout << endl << endl << "Bitte geben sie die Strömungsgeschwindigkeit (m/s) im Rohr an" << endl << endl;
+        cin >> w;
+        cout << endl << endl << "Bitte geben Sie den (hydraulischen) Durchmesser (m) des Rohres an" << endl << endl;
+        cin >> d;
+        cout << endl << endl;
+        Rey = Re(w,kin_vis,d);
+	if (Rey < 2300)
+                {
+                lambda = 64 / Rey; //laminare Strömung
+                }
+        else
+                {
+                lambda = lambdasolver(Rey);
+                cout << endl << endl << "Der Rohrreibungsbeiwert Lambda wurde iterativ ermittelt und liegt bei " << lambda << endl << endl;
+                }
+	cout << endl << endl << "Bitte geben Sie die Länge (m) des Rohrabschnittes an" << endl << endl;
+	cin >> l;
+	zeta = lambda * (l / d);
+	T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cin >> p;
+        p = p * 100000; //Umrechnung Bar zu Pascal
+        Rho = Dichte(T,p);
+        pv = p_v (zeta, Rho, w);
+        cout << endl << endl << "Der Druckverlust infolge von Reibung für den geraden Rohrabschnitt beträgt: " << pv << " Pascal" << endl << endl;
 	}
 
 } //Ende main

@@ -35,7 +35,7 @@ long double Karman_r (long double x, long double y)
 return (1 / pow((2 * log10(x * (sqrt(y)/2.51))),2)) - y;
 }
 
-long double lambdasolver (long double Rey) //SOLVER FÜR LAMBDA IM TURBULENTEN BEREICH NACH PRANDTL/KARMAN
+long double lambdasolver (long double Rey) //SOLVER FÜR LAMBDA IM TURBULENTEN BEREICH NACH PRANDTL/KARMAN (hydraulisch glatt)
 {
 long double y_ceil = 1;
 long double y_floor = 0;
