@@ -35,7 +35,7 @@ double phi;
 double zeta_E, zeta_R;
 double h1;
 double b;
-
+double theta;
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
 cout << "Bitte geben Sie an, aus wie vielen Segmenten Ihre Rohrstrecke besteht" << endl << endl;
@@ -53,14 +53,13 @@ cout << "1: Rohreinlauf" << endl << endl;
 cout << "2: Rohrauslauf" << endl << endl;
 cout << "3: plötzliche Rohrerweiterung" << endl << endl;
 cout << "4: Diffusor" << endl << endl;
-cout << "5: Konfusor" << endl << endl;
+cout << "5: Konfusor / Düse" << endl << endl;
 cout << "6: plötzliche Rohrverengung" << endl << endl;
-cout << "7: Düse" << endl << endl;
-cout << "8: Krümmer" << endl << endl;
-cout << "9: Kniestück" << endl << endl;
-cout << "10: Dehnungsausgleicher" << endl << endl;
-cout << "11: Regelarmatur" << endl << endl;
-cout << "12: gerader Rohrabschnitt" << endl << endl << endl;
+//cout << "7: Krümmer" << endl << endl;
+cout << "8: Kniestück" << endl << endl;
+cout << "9: Kompensatoren / Dehnungsausgleicher" << endl << endl;
+cout << "10: Regelarmatur" << endl << endl;
+cout << "11: gerader Rohrabschnitt" << endl << endl << endl;
 
 
 // Programmstart
@@ -359,12 +358,87 @@ if (w_seg == 4)
 
 if (w_seg == 5)
         {
-        cout << "*Segment Konfusor*" << endl << endl;
+        cout << "*Segment Konfusor / Düse*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "Bitte geben Sie den Eintrittsdurchmesser (m) des Konfusors ein" << endl << endl;
+	cin >> d1;
+	a1 = (M_PI / 4) * pow(d1,2);
+	cout << endl << endl << "Bitte geben Sie den Austrittssdurchmesser (m) des Konfusors ein" << endl << endl;
+	cin >> d2;
+	a2 = (M_PI / 4) * pow(d2,2);
+	zeta = zeta_kon((a2 / a1));
+
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        cin >> T;
+        T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cin >> p;
+        p = p * 100000; //Umrechnung Bar zu Pascal
+        Rho = Dichte(T,p);
+        cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) am Konfusoraustritt an" << endl << endl;
+        cin >> w;
+        pv = p_v (zeta, Rho, w);
+        cout << endl << endl << "Der Druckverlust infolge von Reibung für den Konfusor / Düse beträgt: " << pv << " Pascal" << endl << endl;
 	}
 
+if (w_seg == 6)
+	{
+	cout << "*Segment plötzliche Rohrverengung*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "Bitte geben Sie den Eintrittsdurchmesser (m) des Konfusors ein" << endl << endl;
+        cin >> d1;
+        a1 = (M_PI / 4) * pow(d1,2);
+        cout << endl << endl << "Bitte geben Sie den Austrittssdurchmesser (m) des Konfusors ein" << endl << endl;
+        cin >> d2;
+        a2 = (M_PI / 4) * pow(d2,2);
+	zeta = zeta_plv((a2 / a1));
 
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        cin >> T;
+        T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cin >> p;
+        p = p * 100000; //Umrechnung Bar zu Pascal
+        Rho = Dichte(T,p);
+        cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) am Austritt an" << endl << endl;
+        cin >> w;
+        pv = p_v (zeta, Rho, w);
+        cout << endl << endl << "Der Druckverlust infolge von Reibung für die Rohrverengung beträgt: " << pv << " Pascal" << endl << endl;
+	}
 
+/*if (w_seg == 7)
+	{
+	cout << "*Segment Krümmer*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	}
+*/
 
+if (w_seg == 8)
+	{
+	cout << "*Segment Kniestück*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "Bitte geben Sie den Umlenkwinkel (Grad) des Kniestückes an (Gültigkeitsbereich 0 - 90°)" << endl << endl;
+	cin >> theta;
+	zeta = zeta_knie(theta);
+
+	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        cin >> T;
+        T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cin >> p;
+        p = p * 100000; //Umrechnung Bar zu Pascal
+        Rho = Dichte(T,p);
+        cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) im Kniestück an" << endl << endl;
+        cin >> w;
+        pv = p_v (zeta, Rho, w);
+        cout << endl << endl << "Der Druckverlust infolge von Reibung für das Kniestück beträgt: " << pv << " Pascal" << endl << endl;
+	}
+
+if (w_seg == 9)
+	{
+	cout << "*Segment Kompensatoren / Dehnungsausgleicher*" << endl << endl;
+        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	
+	}
 
 } //Ende main

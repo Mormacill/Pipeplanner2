@@ -15,4 +15,10 @@ long double Karman_r (long double x, long double y);
 
 long double lambdasolver (long double Rey);
 
+double zeta_kon (double qv);
+
+double zeta_plv (double qv);
+
+double zeta_knie (double theta);
+
 #endif

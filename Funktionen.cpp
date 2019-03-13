@@ -59,3 +59,18 @@ while (fabs(eq) > epsilon)
 	}
 return y;
 }
+
+double zeta_kon (double qv)
+{
+return 0.3358 * pow(qv,4) - 1.1084 * pow(qv,3) + 0.9916 * pow(qv,2) - 0.3351 * qv + 0.116;
+}
+
+double zeta_plv (double qv)
+{
+return -0.4429 * qv + 0.4429;
+}
+
+double zeta_knie (double theta)
+{
+return 0.0001 * pow(theta,2) - 0.0008 * theta + 0.0016;
+}
