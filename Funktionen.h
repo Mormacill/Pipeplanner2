@@ -13,4 +13,6 @@ double n_exp (double Rey);
 
 long double Karman_r (long double x, long double y);
 
+long double lambdasolver (long double Rey);
+
 #endif

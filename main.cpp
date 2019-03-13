@@ -310,28 +310,7 @@ if (w_seg == 4)
 		}
 	else
 		{
-		//SOLVER FÜR LAMBDA IM TURBULENTEN BEREICH NACH PRANDTL/KARMAN
-		long double y_ceil = 1;
-		long double y_floor = 0;
-		long double eq = 1;
-		long double y = 0;
-		long double epsilon = 1e-10;
-
-		while (fabs(eq) > epsilon)
-        		{
-        		y = y_floor + (y_ceil - y_floor) / 2;
-        		cout << y << endl;
-        		eq = Karman_r (Rey,y);
-                		if (eq < 0)
-                			{
-                			y_ceil = y;
-                			}
-                		else
-                			{
-                			y_floor = y;
-                			}
-        		}
-		lambda = y;
+		lambda = lambdasolver(Rey);
 		cout << endl << endl << "Der Rohrreibungsbeiwert Lambda wurde iterativ ermittelt und liegt bei " << lambda << endl << endl;
 		}
 	a1 = (M_PI / 4) * pow(d1,2);
@@ -375,7 +354,7 @@ if (w_seg == 4)
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
         pv = p_v (zeta, Rho, w);
-        cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
+        cout << endl << endl << "Der Druckverlust infolge von Reibung für den Diffusor beträgt: " << pv << " Pascal" << endl << endl;
 	} //Ende seg 4
 
 if (w_seg == 5)
