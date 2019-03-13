@@ -21,4 +21,14 @@ double zeta_plv (double qv);
 
 double zeta_knie (double theta);
 
+double zeta_wellrohrkomp (double d);
+
+double zeta_scharfkomp (double d);
+
+double zeta_lyra_glatt (double d);
+
+double zeta_lyra_falten (double d);
+
+double zeta_lyra_well (double d);
+
 #endif

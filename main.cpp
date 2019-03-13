@@ -36,6 +36,9 @@ double zeta_E, zeta_R;
 double h1;
 double b;
 double theta;
+double n_wellen;
+double a;
+
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
 cout << "Bitte geben Sie an, aus wie vielen Segmenten Ihre Rohrstrecke besteht" << endl << endl;
@@ -438,6 +441,92 @@ if (w_seg == 9)
 	{
 	cout << "*Segment Kompensatoren / Dehnungsausgleicher*" << endl << endl;
         cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "Bitte geben Sie den Kompensatortyp an" << endl << endl;
+	cout << "1: Stopfbuchskompensator" << endl;
+	cout << "2: Wellrohrkompensator" << endl;
+	cout << "3: U-Bogen mit Krümmern" << endl;
+	cout << "4: scharfkantiger U-Bogen" << endl;
+	cout << "5: Lyrabogen" << endl << endl;
+	cin >> w_fall;
+	if (w_fall == 1)
+		{
+		zeta = 0.2;
+		}
+	if (w_fall == 2)
+		{
+		cout << endl << endl << "Bitte geben Sie den Durchmesser (m) des Wellrohrkompensators ein" << endl << endl;
+		cin >> d;
+		zeta = zeta_wellrohrkomp(d);
+		cout << endl << endl << "Wie viele Wellen hat der Kompensator?" << endl << endl;
+		cin >> n_wellen;
+		zeta = zeta + (0.2 * (n_wellen - 1));
+		}
+	if (w_fall == 3)
+		{
+		cout << endl << endl << "Bitte geben Sie die Länge der Zwischengeraden a (m) an" << endl << endl;
+		cin >> a;
+		cout << endl << endl << "Bitte geben Sie den Rohrdurchmesser (m) an" << endl << endl;
+		cin >> d;
+		if ((a / d) <= 1)
+			{
+			zeta = 0.33;
+			}
+		else
+			{
+			zeta = 0.21;
+			}
+		}
+	if (w_fall == 4)
+		{
+		cout << endl << endl << "Bitte geben Sie den Durchmesser (m) des scharfkantigen U-Bogens an" << endl << endl;
+		cin >> d;
+		zeta = zeta_scharfkomp(d);
+		}
+	if (w_fall == 5)
+		{
+		cout << endl << endl << "Um welche Art von Lyra-Bogen handelt es sich?" << endl << endl;
+		cout << "1: Glattrohr" << endl;
+		cout << "2: Faltenrohr" << endl;
+		cout << "3: Wellrohr" << endl << endl;
+		cin >> w_individual;
+		if (w_individual == 1)
+			{
+			cout << endl << endl << "ACHTUNG: Der ermittelte Zeta-Wert gilt nur für R0 / d = 6 und r / d = 5!" << endl << endl;
+			cout << endl << endl << "Bitte geben Sie den Durchmesser (m) des Glattrohrs an" << endl << endl;
+			cin >> d;
+			zeta = zeta_lyra_glatt(d);
+			}
+		if (w_individual == 2)
+			{
+			cout << endl << endl << "ACHTUNG: Der ermittelte Zeta-Wert gilt nur für R0 / d = 6 und r / d = 6!" << endl << endl;
+                        cout << endl << endl << "Bitte geben Sie den Durchmesser (m) des Faltenrohrs an" << endl << endl;
+                        cin >> d;
+			zeta = zeta_lyra_falten(d);
+			}
+		if (w_individual == 3)
+			{
+			cout << endl << endl << "ACHTUNG: Der ermittelte Zeta-Wert gilt nur für R0 / d = 5 und r / d = 3!" << endl << endl;
+                        cout << endl << endl << "Bitte geben Sie den Durchmesser (m) des Wellrohrs an" << endl << endl;
+                        cin >> d;
+			zeta = zeta_lyra_well(d);
+			}
+
+		cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        	cin >> T;
+        	T = T + 273.15; //Umrechnung Celsius zu Kelvin
+        	cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        	cin >> p;
+        	p = p * 100000; //Umrechnung Bar zu Pascal
+        	Rho = Dichte(T,p);
+        	cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) im Kompensator an" << endl << endl;
+        	cin >> w;
+        	pv = p_v (zeta, Rho, w);
+        	cout << endl << endl << "Der Druckverlust infolge von Reibung für den gewählten Kompensator beträgt: " << pv << " Pascal" << endl << endl;
+		}
+	}
+
+if (w_seg == 10)
+	{
 	
 	}
 

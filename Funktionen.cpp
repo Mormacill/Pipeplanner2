@@ -74,3 +74,28 @@ double zeta_knie (double theta)
 {
 return 0.0001 * pow(theta,2) - 0.0008 * theta + 0.0016;
 }
+
+double zeta_wellrohrkomp (double d)
+{
+return -29.618 * pow(d,4) + 10.176 * pow(d,3) + 11.74 * pow(d,2) - 3.8326 * d + 1.8605;
+}
+
+double zeta_scharfkomp (double d)
+{
+return 2 * d + 1.9;
+}
+
+double zeta_lyra_glatt (double d)
+{
+return 2 * d + 1.6;
+}
+
+double zeta_lyra_falten (double d)
+{
+return -104.51 * pow(d,4) + 140.29 * pow(d,3) - 64.366 * pow(d,2) + 14.79 * d + 1.1909;
+}
+
+double zeta_lyra_well (double d)
+{
+return -36.102 * pow(d,4) + 39.869 * pow(d,3) - 15.802 * pow(d,2) + 7.0576 * d + 2.6917;
+}
