@@ -685,8 +685,8 @@ if (ans == "y")
 	string s4 = " -e \"set xrange [0:" + Vol1_grenze + "]\"";
 	string s5 = " -e \"set yrange [0:" + Dru1_grenze + "]\"";
 	string s6 = " -e \"plot 'Gnuplot_Data.dat'\"";
-	string s7 = " -e \"f(x) = a**x\"";
-	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a\"";
+	string s7 = " -e \"f(x) = a*x**3+b*x**2+c*x+d\"";
+	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a, b, c, d\"";
 	string s9 = " -e \"plot f(x), 'Gnuplot_Data.dat'\"";
 	string s10 = " -e \"set term png\"";
 	string s11 = " -e \"set output 'Kennlinie.png'\" ";
