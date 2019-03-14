@@ -679,16 +679,17 @@ if (ans == "y")
 	string s3 = " -e \"set ylabel 'Druckverlust'\"";
 	string s4 = " -e \"set xrange [0:" + Vol1_grenze + "]\"";
 	string s5 = " -e \"set yrange [0:" + Dru1_grenze + "]\"";
-	string s6 = " -e \"f(x) = a**x\"";
-	string s7 = " -e \"plot 'Gnuplot_Data.dat'\"";
+	string s6 = " -e \"plot 'Gnuplot_Data.dat'\"";
+	string s7 = " -e \"f(x) = a**x\"";
 	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a\"";
-	string s9 = " -e \"set term png\"";
-	string s10 = " -e \"set output 'Kennlinie.png'\" ";
-	string s11 = " -e  \"replot\"";
-	string s12 = "eog Kennlinie.png";
-	string s13 = s1 + s2 +s3 + s4 + s5 + s7 + s6 + s8 + s9 + s10 + s11;
+	string s9 = " -e \"plot f(x)\"";
+	string s10 = " -e \"set term png\"";
+	string s11 = " -e \"set output 'Kennlinie.png'\" ";
+	string s12 = " -e  \"replot\"";
+	string s13 = "eog Kennlinie.png";
+	string s14 = s1 + s2 +s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11 + s12;
+	system(s14.c_str());
 	system(s13.c_str());
-	system(s12.c_str());
 	}
 
 else
