@@ -9,9 +9,10 @@ else
     read
     if "$REPLY" = "y"; then
     sudo apt install gnuplot
+    fi
 fi
 
-dpkg -s c++ &> /dev/null
+dpkg -s build-essential &> /dev/null
 
 if [ $? -eq 0 ]; then
     echo "C++ ist installiert!"
@@ -20,6 +21,7 @@ else
     read
     if "$REPLY" = "y"; then
     sudo apt install build-essential
+    fi
 fi
 
 echo -e "Pipeplanner wird nun gebaut."
