@@ -676,8 +676,8 @@ if (ans == "y")
 	outfile << "#Volumenstrom Druckverlust" << endl << "0 0" << endl << Vstrom1 << " " << pv1 << endl << Vstrom2 << " " << pv2 << endl;
 	outfile.close();
 
-	Volumenstromgrenze = Vstrom1 + (1 / 3) * Vstrom1;
-	Druckgrenze = pv1 + (1 / 3) * pv1;
+	Volumenstromgrenze = (Vstrom1 + (Vstrom1/3));
+	Druckgrenze = (pv1 + (pv1/3));
 
 	string Vol1g = to_string(Volumenstromgrenze);
 	string Dru1g = to_string(Druckgrenze);
