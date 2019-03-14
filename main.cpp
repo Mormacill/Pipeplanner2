@@ -70,9 +70,17 @@ cout << "11: gerader Rohrabschnitt" << endl << endl << endl;
 
 
 // Programmstart
-cout << "Bitte wählen sie ein Streckensegment aus!" << endl << endl;
+if (i == 0)
+	{
+	cout << "Bitte wählen sie Ihr erstes Streckensegment aus!" << endl << endl;
+	}
+else
+	{
+	cout << "Bitte wählen sie das nächste Streckensegment aus!" << endl << endl;
+	}
 
 cin >> w_seg;
+cout << endl << endl;
 
 if (w_seg == 1)
 	{
@@ -403,7 +411,7 @@ if (w_seg == 6)
         a2 = (M_PI / 4) * pow(d2,2);
 	zeta = zeta_plv((a2 / a1));
 
-	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+	cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
         cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
@@ -432,7 +440,7 @@ if (w_seg == 8)
 	cin >> theta;
 	zeta = zeta_knie(theta);
 
-	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+	cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
         cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
