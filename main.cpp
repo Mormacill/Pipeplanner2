@@ -53,8 +53,8 @@ double Vstrom1, Vstrom2;
 
 //Grafikvariablen
 string ans;
-double Vstrom1g;
-double pv1g;
+double Volumenstromgrenze;
+double Druckgrenze;
 
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
@@ -665,9 +665,9 @@ cout << "Volumenstrom 2: " << Vstrom2 << endl;
 cout << "Druckverlust 2: " << pv2 << endl << endl;
 
 cout << "Möchten Sie die Anlagenkennlinie jetzt ausgeben? (y = ja; beliebige Taste = Programm beenden)" << endl << endl;
-Vstrom1g = 0;//(Vstrom1 + (1 / 3) * Vstrom1);
-pv1g = 0; //(pv1 + (1 / 3) * pv1);
-cout << pv1g << " " << Vstrom1g;
+Volumenstromgrenze = (Vstrom1 + (1 / 3) * Vstrom1);
+Druckgrenze = (pv1 + (1 / 3) * pv1);
+cout << Volumenstromgrenze << " " << Druckgrenze;
 cin >> ans;
 if (ans == "y")
 	{
@@ -676,11 +676,11 @@ if (ans == "y")
 	outfile << "#Volumenstrom Druckverlust" << endl << "0 0" << endl << Vstrom1 << " " << pv1 << endl << Vstrom2 << " " << pv2 << endl;
 	outfile.close();
 
-	Vstrom1g = Vstrom1 + (1 / 3) * Vstrom1;
-	pv1g = pv1 + (1 / 3) * pv1;
+	Volumenstromgrenze = Vstrom1 + (1 / 3) * Vstrom1;
+	Druckgrenze = pv1 + (1 / 3) * pv1;
 
-	string Vol1g = to_string(Vstrom1g);
-	string Dru1g = to_string(pv1g);
+	string Vol1g = to_string(Volumenstromgrenze);
+	string Dru1g = to_string(Druckgrenze);
 
 	string s1 = "gnuplot ";
 	string s2 = "-e \"set xlabel 'Volumenstrom [m^3/s]'\"";
