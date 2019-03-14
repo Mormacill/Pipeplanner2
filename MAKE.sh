@@ -36,7 +36,14 @@ echo "
 
      "
 echo -e "Pipeplanner wird nun gebaut."
+echo "
+     "
 
 make
 sleep 1
 make clean
+
+echo "
+
+     "
+echo "Führen Sie ./pipeplanner aus, um das Programm zu starten."
