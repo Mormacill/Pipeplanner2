@@ -634,12 +634,12 @@ for (i = 0; i < n_seg; i++)
 	{
 	arraysum = arraysum + Druckarray[i];
 	}
-cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << endl;
+cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << endl << endl;
 
 if (k == 0)
 {
 cout << endl << endl << "Zur Erstellung einer Anlagenkennlinie muss ein zweiter Rechenzyklus durchgeführt werden." << endl;
-cout << "Hierzu wählen Sie bitte die gleichen Segmente in der gleichen Reihenfolge aus und Verwendung eines anderen Volumenstromes und einer daraus resultierenden Strömungsgeschwindigkeit." << endl;
+cout << "Hierzu wählen Sie bitte die gleichen Segmente in der gleichen Reihenfolge aus und Verwendung eines anderen Volumenstromes und einer daraus resultierenden Strömungsgeschwindigkeit." << endl << endl;
 pause();
 }
 Drucksammelarray[k] = arraysum;
@@ -666,10 +666,11 @@ if (ans == "y")
 	string s2 = "-e \"plot x\" ";
 	string s3 = "-e \"set term png\" ";
 	string s4 = "-e \"set output 'print.png'\" ";
-	string s5 = "-e  \"replot\" ";
-	string s6 = "& eog print.png";
-	string s7 = s1 + s2 +s3 + s4 +s5 +s6;
+	string s5 = "-e  \"replot\"";
+	string s6 = "eog print.png";
+	string s7 = s1 + s2 +s3 + s4 +s5;
 	system(s7.c_str());
+	system(s6.c_str());
 	}
 
 else
