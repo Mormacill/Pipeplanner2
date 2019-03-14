@@ -633,6 +633,9 @@ if (w_seg == 11)
 	pause(); //Siehe Extras.h
 	}
 } //i-for-Schleife
+
+arraysum = 0;
+
 for (i = 0; i < n_seg; i++)
 	{
 	arraysum = arraysum + Druckarray[i];
@@ -671,9 +674,7 @@ if (ans == "y")
 	outfile.close();
 
 	Vstrom1_grenze = Vstrom1 + (1 / 3) * Vstrom1;
-	cout << Vstrom1_grenze;
 	pv1_grenze = pv1 + (1 / 3) * pv1;
-	cout << pv1_grenze;
 
 	string Vol1_grenze = to_string(Vstrom1_grenze);
 	string Dru1_grenze = to_string(pv1_grenze);
@@ -692,6 +693,7 @@ if (ans == "y")
 	string s12 = " -e  \"replot\"";
 	string s13 = "eog Kennlinie.png";
 	string s14 = s1 + s2 +s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11 + s12;
+	cout << s4 << " " << s5 << endl;
 	system(s14.c_str());
 	system(s13.c_str());
 	}
