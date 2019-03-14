@@ -665,10 +665,12 @@ cout << "Volumenstrom 2: " << Vstrom2 << endl;
 cout << "Druckverlust 2: " << pv2 << endl << endl;
 
 cout << "Möchten Sie die Anlagenkennlinie jetzt ausgeben? (y = ja; beliebige Taste = Programm beenden)" << endl << endl;
-Volumenstromgrenze = (Vstrom1 + (Vstrom1/3));
-Druckgrenze = (pv1 + (pv1/3));
-cout << Volumenstromgrenze << " " << Druckgrenze;
+//Volumenstromgrenze = (Vstrom1 + (Vstrom1/3));
+//Druckgrenze = (pv1 + (pv1/3));
+//cout << Volumenstromgrenze << " " << Druckgrenze;
 cin >> ans;
+cout << endl << endl;
+
 if (ans == "y")
 	{
 	ofstream outfile; //Schreibe Arbeitspunkte in Textfile
@@ -688,8 +690,8 @@ if (ans == "y")
 	string s4 = " -e \"set xrange [0:" + Vol1g + "]\"";
 	string s5 = " -e \"set yrange [0:" + Dru1g + "]\"";
 	string s6 = " -e \"plot 'Gnuplot_Data.dat'\"";
-	string s7 = " -e \"f(x) = a*x**3+b*x**2+c*x+d\"";
-	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a, b, c, d\"";
+	string s7 = " -e \"f(x) = a*x**2+b*x+c\"";
+	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a, b, c\"";
 	string s9 = " -e \"plot f(x), 'Gnuplot_Data.dat'\"";
 	string s10 = " -e \"set term png\"";
 	string s11 = " -e \"set output 'Kennlinie.png'\" ";
