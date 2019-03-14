@@ -669,14 +669,16 @@ if (ans == "y")
 	outfile.close();
 
 	double Vstrom1_grenze = Vstrom1 + (1 / 3) * Vstrom1;
+	cout << Vstrom1_grenze;
 	double pv1_grenze = pv1 + (1 / 3) * pv1;
+	cout << pv1_grenze;
 
 	string Vol1_grenze = to_string(Vstrom1_grenze);
 	string Dru1_grenze = to_string(pv1_grenze);
 
 	string s1 = "gnuplot ";
-	string s2 = "-e \"set xlabel 'Volumenstrom'\"";
-	string s3 = " -e \"set ylabel 'Druckverlust'\"";
+	string s2 = "-e \"set xlabel 'Volumenstrom [m^3/s]'\"";
+	string s3 = " -e \"set ylabel 'Druckverlust [Pa]'\"";
 	string s4 = " -e \"set xrange [0:" + Vol1_grenze + "]\"";
 	string s5 = " -e \"set yrange [0:" + Dru1_grenze + "]\"";
 	string s6 = " -e \"plot 'Gnuplot_Data.dat'\"";
