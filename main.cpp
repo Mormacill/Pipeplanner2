@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include "Funktionen.h"
+#include "Extras.h"
 
 using namespace std;
 
@@ -168,6 +169,7 @@ if (w_seg == 1)
 	pv = p_v (zeta, Rho, w);
 	cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 
 if (w_seg == 2)
@@ -205,7 +207,7 @@ if (w_seg == 2)
 
 	if (w_fall == 3)
 		{
-		cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
+		cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
         	cin >> T;
         	kin_vis = vis(T);
 		kin_vis = kin_vis * pow(10,-7);
@@ -231,7 +233,7 @@ if (w_seg == 2)
 
 	if (w_fall == 4)
 		{
-		cout << "Bitte geben Sie den Rohrdurchmesser (m) an" << endl << endl;
+		cout << endl << endl << "Bitte geben Sie den Rohrdurchmesser (m) an" << endl << endl;
 		cin >> d;
 		cout << endl << endl << "Bitte geben Sie den Düsendurchmesser (m) an" << endl << endl;
 		cin >> d_duse;
@@ -251,6 +253,7 @@ if (w_seg == 2)
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 /*	if (w_fall == 5)
 		{
 
@@ -302,6 +305,7 @@ if (w_seg == 3)
                         cout << endl << endl << "Der Druckverlust infolge von Reibung für die auf den Austrittsquerschnitt bezogene plötzliche Rohrerweiterung beträgt: " << pv << " Pascal" << endl << endl;
                         }
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 
 if (w_seg == 4)
@@ -371,6 +375,7 @@ if (w_seg == 4)
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den Diffusor beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	} //Ende seg 4
 
 if (w_seg == 5)
@@ -397,6 +402,7 @@ if (w_seg == 5)
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den Konfusor / Düse beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 
 if (w_seg == 6)
@@ -423,6 +429,7 @@ if (w_seg == 6)
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für die Rohrverengung beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 
 /*if (w_seg == 7)
@@ -452,6 +459,7 @@ if (w_seg == 8)
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für das Kniestück beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 
 if (w_seg == 9)
@@ -541,6 +549,7 @@ if (w_seg == 9)
         	cout << endl << endl << "Der Druckverlust infolge von Reibung für den gewählten Kompensator beträgt: " << pv << " Pascal" << endl << endl;
 		}
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 
 if (w_seg == 10)
@@ -566,6 +575,7 @@ if (w_seg == 10)
 	pv = (Rho / 2) * pow((w1 - w2),2);
 	cout << endl << endl << "Der Druckverlust infolge von Versperrung für das Drosselelement beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 
 if (w_seg == 11)
@@ -602,6 +612,7 @@ if (w_seg == 11)
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den geraden Rohrabschnitt beträgt: " << pv << " Pascal" << endl << endl;
 	Druckarray[i] = pv;
+	pause(); //Siehe Extras.h
 	}
 } //for-Schleife
 for (i = 0; i < n_seg; i++)
