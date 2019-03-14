@@ -32,6 +32,9 @@ else
     fi
 fi
 
+echo "
+
+     "
 echo -e "Pipeplanner wird nun gebaut."
 
 make
