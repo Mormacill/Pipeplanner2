@@ -53,6 +53,8 @@ double Vstrom1, Vstrom2;
 
 //Grafikvariablen
 string ans;
+double Vstrom1_grenze;
+double pv1_grenze;
 
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
@@ -665,12 +667,12 @@ if (ans == "y")
 	{
 	ofstream outfile; //Schreibe Arbeitspunkte in Textfile
 	outfile.open("Gnuplot_Data.dat");
-	outfile << "#Volumenstrom Druckverlust" << endl << Vstrom1 << " " << pv1 << endl << Vstrom2 << " " << pv2 << endl;
+	outfile << "#Volumenstrom Druckverlust" << endl << "0 0" << endl << Vstrom1 << " " << pv1 << endl << Vstrom2 << " " << pv2 << endl;
 	outfile.close();
 
-	double Vstrom1_grenze = Vstrom1 + (1 / 3) * Vstrom1;
+	Vstrom1_grenze = Vstrom1 + (1 / 3) * Vstrom1;
 	cout << Vstrom1_grenze;
-	double pv1_grenze = pv1 + (1 / 3) * pv1;
+	pv1_grenze = pv1 + (1 / 3) * pv1;
 	cout << pv1_grenze;
 
 	string Vol1_grenze = to_string(Vstrom1_grenze);
@@ -684,7 +686,7 @@ if (ans == "y")
 	string s6 = " -e \"plot 'Gnuplot_Data.dat'\"";
 	string s7 = " -e \"f(x) = a**x\"";
 	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a\"";
-	string s9 = " -e \"plot f(x)\"";
+	string s9 = " -e \"plot f(x), 'Gnuplot_Data.dat'\"";
 	string s10 = " -e \"set term png\"";
 	string s11 = " -e \"set output 'Kennlinie.png'\" ";
 	string s12 = " -e  \"replot\"";
