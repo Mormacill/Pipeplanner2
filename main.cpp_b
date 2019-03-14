@@ -14,7 +14,6 @@ int w_seg;
 int w_fall;
 int w_individual;
 int i;
-int k;
 
 // Kalkulationsvariablen
 double zeta;
@@ -43,15 +42,8 @@ double n_wellen;
 double a;
 double w1, w2;
 double l;
-double Vstrom;
 
 double arraysum = 0;
-
-double pv1, pv2;
-double Vstrom1, Vstrom2;
-
-//Grafikvariablen
-string ans;
 
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
@@ -60,17 +52,10 @@ cout << "Bitte geben Sie an, aus wie vielen Segmenten Ihre Rohrstrecke besteht" 
 cin >> n_seg;
 double Druckarray[n_seg];
 
-double Drucksammelarray[2];
-double Vstromsammelarray[2];
-
-for (k = 0; k < 2; k++)
-{
-cout << endl << "Bitte geben Sie den Volumenstrom (m^3/s) im Rohrsystem an" << endl << endl;
-cin >> Vstrom;
-
 for (i = 0; i < n_seg; i++)
 {
-cout << endl << endl << "Wählbare Rohreinbauelemente: " << endl << endl;
+
+cout << endl << "Wählbare Rohreinbauelemente: " << endl << endl;
 cout << "Siehe Handbuch für genaue Teildefinition!" << endl << endl << endl;
 cout << "1: Rohreinlauf" << endl << endl;
 cout << "2: Rohrauslauf" << endl << endl;
@@ -629,52 +614,12 @@ if (w_seg == 11)
 	Druckarray[i] = pv;
 	pause(); //Siehe Extras.h
 	}
-} //i-for-Schleife
+} //for-Schleife
 for (i = 0; i < n_seg; i++)
 	{
 	arraysum = arraysum + Druckarray[i];
 	}
 cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << endl;
 
-if (k == 0)
-{
-cout << endl << endl << "Zur Erstellung einer Anlagenkennlinie muss ein zweiter Rechenzyklus durchgeführt werden." << endl;
-cout << "Hierzu wählen Sie bitte die gleichen Segmente in der gleichen Reihenfolge aus und Verwendung eines anderen Volumenstromes und einer daraus resultierenden Strömungsgeschwindigkeit." << endl;
-pause();
-}
-Drucksammelarray[k] = arraysum;
-Vstromsammelarray[k] = Vstrom;
-
-}//k-for-Schleife
-
-pv1 = Drucksammelarray[0];
-pv2 = Drucksammelarray[1];
-Vstrom1 = Vstromsammelarray[0];
-Vstrom2 = Vstromsammelarray[1];
-
-cout << "Folgende Arbeitspunkte zur Erstellung einer Anlagenkennlinie wurden gesammelt:" << endl << endl;
-cout << "Volumenstrom 1: " << Vstrom1 << endl;
-cout << "Druckverlust 1: " << pv1 << endl << endl;
-cout << "Volumenstrom 2: " << Vstrom2 << endl;
-cout << "Druckverlust 2: " << pv2 << endl << endl;
-
-cout << "Möchten Sie die Anlagenkennlinie jetzt ausgeben? (y = ja; beliebige Taste = Programm beenden)" << endl << endl;
-cin >> ans;
-if (ans == "y")
-	{
-	string s1 = "gnuplot ";
-	string s2 = "-e \"plot x\" ";
-	string s3 = "-e \"set term png\" ";
-	string s4 = "-e \"set output 'print.png'\" ";
-	string s5 = "-e  \"replot\" ";
-	string s6 = "& eog print.png";
-	string s7 = s1 + s2 +s3 + s4 +s5 +s6;
-	system(s7.c_str());
-	}
-
-else
-	{
-	return 0;
-	}
 
 } //Ende main
