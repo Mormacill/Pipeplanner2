@@ -47,3 +47,5 @@ echo "
 
      "
 echo "Führen Sie ./pipeplanner aus, um das Programm zu starten."
+echo "
+     "
