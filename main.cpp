@@ -665,8 +665,8 @@ cout << "Volumenstrom 2: " << Vstrom2 << endl;
 cout << "Druckverlust 2: " << pv2 << endl << endl;
 
 cout << "Möchten Sie die Anlagenkennlinie jetzt ausgeben? (y = ja; beliebige Taste = Programm beenden)" << endl << endl;
-Vstrom1_grenze = (1 / 3) * Vstrom1;
-pv1_grenze = (1/3)*pv1;
+Vstrom1_grenze = (Vstrom1 + (1 / 3) * Vstrom1);
+pv1_grenze = (pv1 + (1 / 3) * pv1);
 cout << pv1_grenze << " " << Vstrom1_grenze;
 cin >> ans;
 if (ans == "y")
@@ -696,7 +696,6 @@ if (ans == "y")
 	string s12 = " -e  \"replot\"";
 	string s13 = "eog Kennlinie.png";
 	string s14 = s1 + s2 +s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11 + s12;
-	cout << s4 << " " << s5 << endl;
 	system(s14.c_str());
 	system(s13.c_str());
 	}
