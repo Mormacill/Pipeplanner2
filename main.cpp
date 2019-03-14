@@ -12,6 +12,7 @@ int n_seg = 0;
 int w_seg;
 int w_fall;
 int w_individual;
+int i;
 
 // Kalkulationsvariablen
 double zeta;
@@ -41,18 +42,19 @@ double a;
 double w1, w2;
 double l;
 
+double arraysum = 0;
+
 // Head
 cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
 cout << "Bitte geben Sie an, aus wie vielen Segmenten Ihre Rohrstrecke besteht" << endl << endl;
 
-cout << endl;
-
 cin >> n_seg;
 double Druckarray[n_seg];
 
-cout << endl;
+for (i = 0; i < n_seg; i++)
+{
 
-cout << "Wählbare Rohreinbauelemente: " << endl << endl;
+cout << endl << "Wählbare Rohreinbauelemente: " << endl << endl;
 cout << "Siehe Handbuch für genaue Teildefinition!" << endl << endl << endl;
 cout << "1: Rohreinlauf" << endl << endl;
 cout << "2: Rohrauslauf" << endl << endl;
@@ -68,7 +70,7 @@ cout << "11: gerader Rohrabschnitt" << endl << endl << endl;
 
 
 // Programmstart
-cout << "Bitte wählen sie Ihr erstes Streckensegment aus!" << endl << endl;
+cout << "Bitte wählen sie ein Streckensegment aus!" << endl << endl;
 
 cin >> w_seg;
 
@@ -157,6 +159,7 @@ if (w_seg == 1)
 	cin >> w;
 	pv = p_v (zeta, Rho, w);
 	cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
+	Druckarray[i] = pv;
 	}
 
 if (w_seg == 2)
@@ -239,7 +242,7 @@ if (w_seg == 2)
         cin >> w;
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den Einlauf beträgt: " << pv << " Pascal" << endl << endl;
-
+	Druckarray[i] = pv;
 /*	if (w_fall == 5)
 		{
 
@@ -290,6 +293,7 @@ if (w_seg == 3)
                         pv = p_v (zeta, Rho, w);
                         cout << endl << endl << "Der Druckverlust infolge von Reibung für die auf den Austrittsquerschnitt bezogene plötzliche Rohrerweiterung beträgt: " << pv << " Pascal" << endl << endl;
                         }
+	Druckarray[i] = pv;
 	}
 
 if (w_seg == 4)
@@ -358,6 +362,7 @@ if (w_seg == 4)
         Rho = Dichte(T,p);
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den Diffusor beträgt: " << pv << " Pascal" << endl << endl;
+	Druckarray[i] = pv;
 	} //Ende seg 4
 
 if (w_seg == 5)
@@ -383,6 +388,7 @@ if (w_seg == 5)
         cin >> w;
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den Konfusor / Düse beträgt: " << pv << " Pascal" << endl << endl;
+	Druckarray[i] = pv;
 	}
 
 if (w_seg == 6)
@@ -408,6 +414,7 @@ if (w_seg == 6)
         cin >> w;
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für die Rohrverengung beträgt: " << pv << " Pascal" << endl << endl;
+	Druckarray[i] = pv;
 	}
 
 /*if (w_seg == 7)
@@ -436,6 +443,7 @@ if (w_seg == 8)
         cin >> w;
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für das Kniestück beträgt: " << pv << " Pascal" << endl << endl;
+	Druckarray[i] = pv;
 	}
 
 if (w_seg == 9)
@@ -524,6 +532,7 @@ if (w_seg == 9)
         	pv = p_v (zeta, Rho, w);
         	cout << endl << endl << "Der Druckverlust infolge von Reibung für den gewählten Kompensator beträgt: " << pv << " Pascal" << endl << endl;
 		}
+	Druckarray[i] = pv;
 	}
 
 if (w_seg == 10)
@@ -548,6 +557,7 @@ if (w_seg == 10)
 	w2 = w1 * (a1 / a2);
 	pv = (Rho / 2) * pow((w1 - w2),2);
 	cout << endl << endl << "Der Druckverlust infolge von Versperrung für das Drosselelement beträgt: " << pv << " Pascal" << endl << endl;
+	Druckarray[i] = pv;
 	}
 
 if (w_seg == 11)
@@ -583,6 +593,12 @@ if (w_seg == 11)
         Rho = Dichte(T,p);
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für den geraden Rohrabschnitt beträgt: " << pv << " Pascal" << endl << endl;
+	Druckarray[i] = pv;
 	}
-
+} //for-Schleife
+for (i = 0; i < n_seg; i++)
+	{
+	arraysum = arraysum + Druckarray[i];
+	}
+cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << endl;
 } //Ende main
