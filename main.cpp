@@ -683,6 +683,7 @@ if (ans == "y")
 
 	cout << "Eine Regression wird durch ein Polynom 2. Grades durchgeführt (a * x^2 + b * x + c)" << endl;
 	cout << "Die ermittelten Werte für a, b und c werden nach der Gnuplot-Iteration angezeigt." << endl << endl;
+	pause();
 
 	string Vol1g = to_string(Volumenstromgrenze);
 	string Dru1g = to_string(Druckgrenze);
