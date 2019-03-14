@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <fstream>
 #include "Funktionen.h"
 #include "Extras.h"
 
@@ -662,15 +663,32 @@ cout << "Möchten Sie die Anlagenkennlinie jetzt ausgeben? (y = ja; beliebige Ta
 cin >> ans;
 if (ans == "y")
 	{
+	ofstream outfile; //Schreibe Arbeitspunkte in Textfile
+	outfile.open("Gnuplot_Data.dat");
+	outfile << "#Volumenstrom Druckverlust" << endl << Vstrom1 << " " << pv1 << endl << Vstrom2 << " " << pv2 << endl;
+	outfile.close();
+
+	double Vstrom1_grenze = Vstrom1 + (1 / 3) * Vstrom1;
+	double pv1_grenze = pv1 + (1 / 3) * pv1;
+
+	string Vol1_grenze = to_string(Vstrom1_grenze);
+	string Dru1_grenze = to_string(pv1_grenze);
+
 	string s1 = "gnuplot ";
-	string s2 = "-e \"plot x\" ";
-	string s3 = "-e \"set term png\" ";
-	string s4 = "-e \"set output 'print.png'\" ";
-	string s5 = "-e  \"replot\"";
-	string s6 = "eog print.png";
-	string s7 = s1 + s2 +s3 + s4 +s5;
-	system(s7.c_str());
-	system(s6.c_str());
+	string s2 = "-e \"set xlabel 'Volumenstrom'\"";
+	string s3 = " -e \"set ylabel 'Druckverlust'\"";
+	string s4 = " -e \"set xrange [0:" + Vol1_grenze + "]\"";
+	string s5 = " -e \"set yrange [0:" + Dru1_grenze + "]\"";
+	string s6 = " -e \"f(x) = a**x\"";
+	string s7 = " -e \"plot 'Gnuplot_Data.dat'\"";
+	string s8 = " -e \"fit 'Gnuplot_Data.dat' via a\"";
+	string s9 = " -e \"set term png\"";
+	string s10 = " -e \"set output 'Kennlinie.png'\" ";
+	string s11 = " -e  \"replot\"";
+	string s12 = "eog Kennlinie.png";
+	string s13 = s1 + s2 +s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11;
+	system(s13.c_str());
+	system(s12.c_str());
 	}
 
 else
