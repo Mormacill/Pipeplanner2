@@ -665,8 +665,8 @@ cout << "Volumenstrom 2: " << Vstrom2 << endl;
 cout << "Druckverlust 2: " << pv2 << endl << endl;
 
 cout << "Möchten Sie die Anlagenkennlinie jetzt ausgeben? (y = ja; beliebige Taste = Programm beenden)" << endl << endl;
-Volumenstromgrenze = (Vstrom1 + (1 / 3) * Vstrom1);
-Druckgrenze = (pv1 + (1 / 3) * pv1);
+Volumenstromgrenze = (Vstrom1 + (Vstrom1/3));
+Druckgrenze = (pv1 + (pv1/3));
 cout << Volumenstromgrenze << " " << Druckgrenze;
 cin >> ans;
 if (ans == "y")
