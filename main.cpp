@@ -686,7 +686,7 @@ if (ans == "y")
 	string s10 = " -e \"set output 'Kennlinie.png'\" ";
 	string s11 = " -e  \"replot\"";
 	string s12 = "eog Kennlinie.png";
-	string s13 = s1 + s2 +s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11;
+	string s13 = s1 + s2 +s3 + s4 + s5 + s7 + s6 + s8 + s9 + s10 + s11;
 	system(s13.c_str());
 	system(s12.c_str());
 	}
