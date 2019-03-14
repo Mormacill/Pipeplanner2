@@ -1,19 +1,25 @@
 #!/bin/bash
 
-if ! gnuplot > /dev/null; then
-   echo -e "Gnuplot wurde noch nicht auf Ihrem System installiert. Möchten Sie dies jetzt tun? (y/n) \c"
-   read
-   if "$REPLY" = "y"; then
-      sudo apt install gnuplot -y
-   fi
+dpkg -s gnuplot &> /dev/null
+
+if [ $? -eq 0 ]; then
+    echo "Gnuplot ist installiert!"
+else
+    echo "Gnuplot ist noch nicht installiert, möchte Sie dies jetzt tun? (y/n)"
+    read
+    if "$REPLY" = "y"; then
+    sudo apt install gnuplot
 fi
 
-if ! c++ > /dev/null; then
-   echo -e "C++ wurde noch nicht auf Ihrem System installiert. Möchten Sie dies jetzt tun? (y/n) \c"
-   read
-   if "$REPLY" = "y"; then
-      sudo apt install build-essential -y
-   fi
+dpkg -s c++ &> /dev/null
+
+if [ $? -eq 0 ]; then
+    echo "C++ ist installiert!"
+else
+    echo "C++ ist noch nicht installiert, möchte Sie dies jetzt tun? (y/n)"
+    read
+    if "$REPLY" = "y"; then
+    sudo apt install build-essential
 fi
 
 echo -e "Pipeplanner wird nun gebaut."
