@@ -682,7 +682,7 @@ if (ans == "y")
 	Volumenstromgrenze = (Vstrom1 + (Vstrom1/3));
 	Druckgrenze = (pv1 + (pv1/3));
 
-	cout << "Eine Regression wird durch ein Polynom 2. Grades durchgeführt (a * x^2 + b * x + c)" << endl;
+	cout << "Eine Regression wird durch ein Polynom 2. Grades durchgeführt (a * x^2 + b * x)" << endl;
 	cout << "Die ermittelten Werte für a, b und c werden nach der Gnuplot-Iteration angezeigt." << endl << endl;
 	pause();
 
@@ -695,8 +695,8 @@ if (ans == "y")
 	string s4 = " -e \"set xrange [0:" + Vol1g + "]\"";
 	string s5 = " -e \"set yrange [0:" + Dru1g + "]\"";
 	string s6 = " -e \"plot 'Gnuplot_Data.dat'\"";
-	string s7 = " -e \"f(x) = a*x**2+b*x+c\"";
-	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a, b, c\"";
+	string s7 = " -e \"f(x) = a*x**2+b*x\"";
+	string s8 = " -e \"fit f(x) 'Gnuplot_Data.dat' via a, b\"";
 	string s9 = " -e \"plot f(x), 'Gnuplot_Data.dat'\"";
 	string s10 = " -e \"set term png\"";
 	string s11 = " -e \"set output 'Kennlinie.png'\" ";
