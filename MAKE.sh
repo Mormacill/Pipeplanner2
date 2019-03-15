@@ -60,7 +60,7 @@ else
     echo "make ist noch nicht installiert, möchte Sie dies jetzt tun? (y/n) "
     read ANTWORT
     if [ "$ANTWORT" == "y" ]; then
-    sudo apt install "make" -y
+    sudo apt install build-essential -y
     fi
 fi
 
