@@ -646,7 +646,7 @@ cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << end
 if (k == 0)
 {
 cout << endl << endl << "\033[0;32mZur Erstellung einer Anlagenkennlinie muss ein zweiter Rechenzyklus durchgeführt werden." << endl;
-cout << "Hierzu wählen Sie bitte die gleichen Segmente in der gleichen Reihenfolge aus und Verwendung eines anderen Volumenstromes und einer daraus resultierenden Strömungsgeschwindigkeit.\033[0;37m" << endl << endl;
+cout << "Hierzu wählen Sie bitte die gleichen Segmente in der gleichen Reihenfolge aus unter Verwendung eines anderen (kleineren) Volumenstromes und einer daraus resultierenden Strömungsgeschwindigkeit in den Segmenten.\033[0;37m" << endl << endl;
 pause();
 }
 Drucksammelarray[k] = arraysum;
