@@ -683,7 +683,7 @@ if (ans == "y")
 	Druckgrenze = (pv1 + (pv1/3));
 
 	cout << "Eine Regression wird durch ein Polynom 2. Grades durchgeführt (a * x^2 + b * x)" << endl;
-	cout << "Die ermittelten Werte für a, b und c werden nach der Gnuplot-Iteration angezeigt." << endl << endl;
+	cout << "Die ermittelten Werte für a und b werden nach der Gnuplot-Iteration angezeigt." << endl << endl;
 	pause();
 
 	string Vol1g = to_string(Volumenstromgrenze);
