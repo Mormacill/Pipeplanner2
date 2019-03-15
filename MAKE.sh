@@ -32,6 +32,22 @@ else
     fi
 fi
 
+dpkg -s eog &> /dev/null
+
+if [ $? -eq 0 ]; then
+    echo "
+    "
+    echo "EyeOfGnome ist installiert!"
+else
+    echo "
+    "
+    echo "EyeOfGnome ist noch nicht installiert, möchte Sie dies jetzt tun? (y/n) "
+    read ANTWORT
+    if [ "$ANTWORT" == "y" ]; then
+    sudo apt install eog -y
+    fi
+fi
+
 echo "
 
      "
