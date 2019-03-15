@@ -57,7 +57,8 @@ double Volumenstromgrenze;
 double Druckgrenze;
 
 // Head
-cout << "Druckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0" << endl << endl;
+cout << endl << endl;
+cout << "\033[0;36mDruckverlustrechner für hydraulisch glatte Rohrstrecken mit dem Medium Luft  v1.0\033[0;37m" << endl << endl;
 cout << "Bitte geben Sie an, aus wie vielen Segmenten Ihre Rohrstrecke besteht" << endl << endl;
 
 cin >> n_seg;
@@ -104,7 +105,7 @@ cout << endl << endl;
 if (w_seg == 1)
 	{
 	cout << "*Segment Rohreinlauf*" << endl << endl;
-	cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+	cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Welcher Rohreinlauf liegt vor?" << endl << endl << endl;
 	cout << "1: Fall 1" << endl;
 	cout << "2: Fall 2" << endl;
@@ -193,7 +194,7 @@ if (w_seg == 1)
 if (w_seg == 2)
 	{
 	cout << "*Segment Rohrauslauf*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Welcher Rohrauslauf liegt vor?" << endl << endl << endl;
         cout << "1: Fall 1" << endl;
         cout << "2: Fall 2" << endl;
@@ -281,7 +282,7 @@ if (w_seg == 2)
 if (w_seg == 3)
         {
         cout << "*Segment plötzliche Rohrerweiterung*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Möchte Sie die Berechnung des Zeta-Wertes auf den Eintritts- (1) oder den Austrittsquerschnitt (2) beziehen?" << endl << endl;
 	cin >> w_individual;
         	if (w_individual == 1)
@@ -329,7 +330,7 @@ if (w_seg == 3)
 if (w_seg == 4)
         {
         cout << "*Segment Diffusor*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
         cin >> T;
         kin_vis = vis(T);
@@ -399,7 +400,7 @@ if (w_seg == 4)
 if (w_seg == 5)
         {
         cout << "*Segment Konfusor / Düse*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie den Eintrittsdurchmesser (m) des Konfusors ein" << endl << endl;
 	cin >> d1;
 	a1 = (M_PI / 4) * pow(d1,2);
@@ -426,7 +427,7 @@ if (w_seg == 5)
 if (w_seg == 6)
 	{
 	cout << "*Segment plötzliche Rohrverengung*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie den Eintrittsdurchmesser (m) des Konfusors ein" << endl << endl;
         cin >> d1;
         a1 = (M_PI / 4) * pow(d1,2);
@@ -460,7 +461,7 @@ if (w_seg == 6)
 if (w_seg == 8)
 	{
 	cout << "*Segment Kniestück*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie den Umlenkwinkel (Grad) des Kniestückes an (Gültigkeitsbereich 0 - 90°)" << endl << endl;
 	cin >> theta;
 	zeta = zeta_knie(theta);
@@ -483,7 +484,7 @@ if (w_seg == 8)
 if (w_seg == 9)
 	{
 	cout << "*Segment Kompensator / Dehnungsausgleicher*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie den Kompensatortyp an" << endl << endl;
 	cout << "1: Stopfbuchskompensator" << endl;
 	cout << "2: Wellrohrkompensator" << endl;
@@ -573,7 +574,7 @@ if (w_seg == 9)
 if (w_seg == 10)
 	{
 	cout << "*Segment Regler / Drosselklappe*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
@@ -599,7 +600,7 @@ if (w_seg == 10)
 if (w_seg == 11)
 	{
 	cout << "*Segment gerades Rohr*" << endl << endl;
-        cout << "Bitte schlagen Sie im Handbuch das entsprechende Kapitel auf!" << endl << endl;
+        cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein (Gültigkeitsbereich -40 - 500°C)" << endl << endl;
         cin >> T;
         kin_vis = vis(T);
@@ -644,8 +645,8 @@ cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << end
 
 if (k == 0)
 {
-cout << endl << endl << "Zur Erstellung einer Anlagenkennlinie muss ein zweiter Rechenzyklus durchgeführt werden." << endl;
-cout << "Hierzu wählen Sie bitte die gleichen Segmente in der gleichen Reihenfolge aus und Verwendung eines anderen Volumenstromes und einer daraus resultierenden Strömungsgeschwindigkeit." << endl << endl;
+cout << endl << endl << "\033[0;32mZur Erstellung einer Anlagenkennlinie muss ein zweiter Rechenzyklus durchgeführt werden." << endl;
+cout << "Hierzu wählen Sie bitte die gleichen Segmente in der gleichen Reihenfolge aus und Verwendung eines anderen Volumenstromes und einer daraus resultierenden Strömungsgeschwindigkeit.\033[0;37m" << endl << endl;
 pause();
 }
 Drucksammelarray[k] = arraysum;
