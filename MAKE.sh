@@ -48,22 +48,6 @@ else
     fi
 fi
 
-dpkg -s "make" &> /dev/null
-
-if [ $? -eq 0 ]; then
-    echo "
-    "
-    echo "make ist installiert!"
-else
-    echo "
-    "
-    echo "make ist noch nicht installiert, möchte Sie dies jetzt tun? (y/n) "
-    read ANTWORT
-    if [ "$ANTWORT" == "y" ]; then
-    sudo apt install build-essential -y
-    fi
-fi
-
 echo "
 
      "
