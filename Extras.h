@@ -3,4 +3,6 @@
 
 int pause();
 
+int Druckcheck(pv);
+
 #endif
