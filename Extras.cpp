@@ -53,4 +53,5 @@ int Gnuplotausgabe(double pv1, double pv2, double Vstrom1, double Vstrom2)
         string s14 = s1 + s2 +s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11 + s12;
         system(s14.c_str());
         system(s13.c_str());
+	return 0;
 }
