@@ -73,7 +73,7 @@ cout << endl << endl;
 
 if (w_seg == 1)
 {
-pv = Segment1(); //Siege Segmente.cpp
+pv = Segment1(); //Siehe Segmente.cpp
 Druckcheck(pv); //Siehe Extras.cpp
 Druckarray[i] = pv;
 pause(); //Siehe Extras.cpp
