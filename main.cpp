@@ -189,7 +189,7 @@ cout << endl << endl;
 
 if (ans == "y")
 	{
-	Gnuplotausgabe(pv1,pv2,Vstrom1,Vstrom2);
+	Gnuplotausgabe(pv1,pv2,Vstrom1,Vstrom2); //Siehe Extras.cpp
 	}
 
 else
