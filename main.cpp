@@ -170,7 +170,7 @@ pause();
 Drucksammelarray[k] = arraysum;
 Vstromsammelarray[k] = Vstrom;
 
-}//k-for-Schleife
+} //k-for-Schleife
 
 pv1 = Drucksammelarray[0];
 pv2 = Drucksammelarray[1];
