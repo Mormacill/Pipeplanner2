@@ -60,6 +60,61 @@ while (fabs(eq) > epsilon)
 return y;
 }
 
+double zeta_winkeleinlauf (double einl_delta) //Einlauf Fall 4
+{
+return 0.5 + 0.3 * cos(einl_delta) + 0.2 * pow(cos(einl_delta),2);
+}
+
+double zeta_Rd (double Rd) //Einlauf Fall 5 - Funktion aus polynomischer Regression von Tabellenwerten (s.S. 182 Bohl, 14. Auflage)
+{
+return 0.4 * pow(Rd,2) - 0.9 * Rd + 0.55;
+}
+
+double zeta_engst (double dde) //Einlauf Fall 6 - Funktion aus polynomischer Regression von Tabellenwerten (s.S. 182 Bohl, 14. Auflage)
+{
+return 0.0059 * pow(dde,4) - 0.1132 * pow(dde,3) + 3.4345 * pow(dde,2) -4.6504 * dde + 1.8231;
+}
+
+double zeta_ausl_rq (double n)
+{
+return (pow(((2 * n) + 1),3) * pow((n + 1),3)) / (4 * pow(n,4) * ((2 * n) + 3) * (n + 3));
+}
+
+double zeta_ausl_recht (double n)
+{
+return (pow((n + 1),3)) / (pow(n,2) * (n + 3));
+}
+
+double zeta_kreisdiff_E (double phi, double a1, double a2)
+{
+return 3.2 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
+}
+
+double zeta_kreisdiff_R (double phi, double a1, double a2, double lambda)
+{
+return (lambda / (8 * sin(phi/2))) * (1 - pow((a1 / a2),2));
+}
+
+double zeta_rechtdiff_E (double phi, double a1, double a2)
+{
+return 4 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
+}
+
+double zeta_rechtdiff_R (double phi, double a1, double a2, double lambda)
+{
+return (lambda / (16 * sin(phi/2))) * (1 - pow((a1 / a2),2));
+}
+
+double zeta_flachdiff_E (double phi, double a1, double a2)
+{
+return 3.2 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
+}
+
+double zeta_flachdiff_R (double phi, double a1, double a2, double lambda, double h1, double b)
+{
+return (lambda / (4 * sin(phi/2))) * ((h1 / b) * (1 - (a1 / a2)) + 0.5 * (1 - pow((a1 / a2),2)));
+}
+
 double zeta_kon (double qv)
 {
 return 0.3358 * pow(qv,4) - 1.1084 * pow(qv,3) + 0.9916 * pow(qv,2) - 0.3351 * qv + 0.116;

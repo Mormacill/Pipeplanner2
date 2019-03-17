@@ -3,6 +3,6 @@
 
 int pause();
 
-int Druckcheck(pv);
+int Druckcheck(double pv);
 
 #endif

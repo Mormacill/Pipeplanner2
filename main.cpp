@@ -82,11 +82,10 @@ cout << "3: plötzliche Rohrerweiterung" << endl << endl;
 cout << "4: Diffusor" << endl << endl;
 cout << "5: Konfusor / Düse" << endl << endl;
 cout << "6: plötzliche Rohrverengung" << endl << endl;
-//cout << "7: Krümmer" << endl << endl;
-cout << "8: Kniestück" << endl << endl;
-cout << "9: Kompensatoren / Dehnungsausgleicher" << endl << endl;
-cout << "10: Regler / Drosselklappe" << endl << endl;
-cout << "11: gerader Rohrabschnitt" << endl << endl << endl;
+cout << "7: Kniestück" << endl << endl;
+cout << "8: Kompensatoren / Dehnungsausgleicher" << endl << endl;
+cout << "9: Regler / Drosselklappe" << endl << endl;
+cout << "10: gerader Rohrabschnitt" << endl << endl << endl;
 
 
 // Programmstart
@@ -150,7 +149,7 @@ if (w_seg == 1)
 		cout << endl << endl << "Bitte geben Sie den Knickwinkel delta (in Grad) des Einlaufs an" << endl << endl;
 		cin >> einl_delta;
 		einl_delta = einl_delta * M_PI/180; //Umrechnung von Grad in Radiant
-		zeta = 0.5 + 0.3 * cos(einl_delta) + 0.2 * pow(cos(einl_delta),2);
+		zeta = zeta_winkeleinlauf(einl_delta);
 		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
 		}
 
@@ -164,7 +163,7 @@ if (w_seg == 1)
 			}
 		else
 			{
-			zeta = 0.4 * pow(Rd,2) - 0.9 * Rd + 0.55; //Funktion aus polynomischer Regression von Tabellenwerten (s.S. 182 Bohl, 14. Auflage)
+			zeta = zeta_Rd(Rd);
 			}
 		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
 		}
@@ -173,13 +172,13 @@ if (w_seg == 1)
 		{
 		cout << endl << endl << "Bitte geben Sie das quadrierte Verhältnis vom Rohrdurchmesser zum Einlaufdurchmesser (d/de)^2 an" << endl << endl;
 		cin >> dde;
-		zeta = 0.0059 * pow(dde,4) - 0.1132 * pow(dde,3) + 3.4345 * pow(dde,2) -4.6504 * dde + 1.8231;  //Funktion aus polynomischer Regression von Tabellenwerten (s.S. 182 Bohl, 14. Auflage)
+		zeta = zeta_engst(dde);
 		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
 		}
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
 	cin >> T;
 	T = T + 273.15; //Umrechnung Celsius zu Kelvin
-	cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+	cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
 	cin >> p;
 	p = p * 100000; //Umrechnung Bar zu Pascal
  	Rho = Dichte(T,p);
@@ -201,7 +200,6 @@ if (w_seg == 2)
         cout << "2: Fall 2" << endl;
         cout << "3: Fall 3" << endl;
         cout << "4: Fall 4" << endl;
- //     cout << "5: Fall 5" << endl;
 	cin >> w_fall;
 
 	if (w_fall == 1)
@@ -241,11 +239,11 @@ if (w_seg == 2)
 		cin >> w_individual;
                 if (w_individual == 1)
                         {
-                        zeta = (pow(((2 * n) + 1),3) * pow((n + 1),3)) / (4 * pow(n,4) * ((2 * n) + 3) * (n + 3));
+                        zeta = zeta_ausl_rq(n);
                         }
                 if (w_individual == 2)
                         {
-                        zeta = (pow((n + 1),3)) / (pow(n,2) * (n + 3));
+                        zeta = zeta_ausl_recht(n);
                         }
 		cout << endl << endl << "Für die Rechnung wurde ein Zeta-Wert von " << zeta << " errechnet" << endl << endl;
 		}
@@ -264,7 +262,7 @@ if (w_seg == 2)
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -275,17 +273,13 @@ if (w_seg == 2)
 	Druckcheck(pv);
 	Druckarray[i] = pv;
 	pause(); //Siehe Extras.h
-/*	if (w_fall == 5)
-		{
-
-		}	*/
 	}
 
 if (w_seg == 3)
         {
         cout << "*Segment plötzliche Rohrerweiterung*" << endl << endl;
         cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
-	cout << "Möchte Sie die Berechnung des Zeta-Wertes auf den Eintritts- (1) oder den Austrittsquerschnitt (2) beziehen?" << endl << endl;
+	cout << "Möchten Sie die Berechnung des Zeta-Wertes auf den Eintritts- (1) oder den Austrittsquerschnitt (2) beziehen?" << endl << endl;
 	cin >> w_individual;
         	if (w_individual == 1)
         		{
@@ -297,7 +291,7 @@ if (w_seg == 3)
 			cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         		cin >> T;
         		T = T + 273.15; //Umrechnung Celsius zu Kelvin
-       			cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+       			cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         		cin >> p;
         		p = p * 100000; //Umrechnung Bar zu Pascal
         		Rho = Dichte(T,p);
@@ -316,7 +310,7 @@ if (w_seg == 3)
 			cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
                         cin >> T;
                         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-                        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+                        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
                         cin >> p;
                         p = p * 100000; //Umrechnung Bar zu Pascal
                         Rho = Dichte(T,p);
@@ -364,16 +358,16 @@ if (w_seg == 4)
 		{
 		cout << endl << endl << "Bitte geben Sie den Öffnungswinkel des Kreisdiffusors an (Gültigkeitsbereich 0 - 40°)" << endl << endl;
 		cin >> phi;
-		zeta_E = 3.2 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
-		zeta_R = (lambda / (8 * sin(phi/2))) * (1 - pow((a1 / a2),2));
+		zeta_E = zeta_kreisdiff_E(phi,a1,a2);
+		zeta_R = zeta_kreisdiff_R(phi,a1,a2,lambda);
 		zeta = zeta_E + zeta_R;
 		}
 	if (w_fall == 2)
 		{
 		cout << endl << endl << "Bitte geben Sie den Öffnungswinkel des Rechteckdiffusors an (Gültigkeitsbereich 0 - 25°)" << endl << endl;
                 cin >> phi;
-                zeta_E = 4 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
-                zeta_R = (lambda / (16 * sin(phi/2))) * (1 - pow((a1 / a2),2));
+                zeta_E = zeta_rechtdiff_E(phi,a1,a2);
+                zeta_R = zeta_rechtdiff_R(phi,a1,a2,lambda);
                 zeta = zeta_E + zeta_R;
 		}
 	if (w_fall == 3)
@@ -384,13 +378,13 @@ if (w_seg == 4)
 		cin >> h1;
 		cout << endl << endl << "Bitte geben Sie die Diffusorbreite (m) an" << endl << endl;
                 cin >> b;
-                zeta_E = 3.2 * tan(phi / 2) * pow((tan(phi / 2)),(1/4)) * pow((1 - (a1 / a2)),2);
-                zeta_R = (lambda / (4 * sin(phi/2))) * ((h1 / b) * (1 - (a1 / a2)) + 0.5 * (1 - pow((a1 / a2),2)));
+                zeta_E = zeta_flachdiff_E(phi,a1,a2);
+                zeta_R = zeta_flachdiff_R(phi,a1,a2,lambda,h1,b);
                 zeta = zeta_E + zeta_R;
 		}
 
 	T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums am Diffusoreintritt ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums am Diffusoreintritt ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -416,7 +410,7 @@ if (w_seg == 5)
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -444,7 +438,7 @@ if (w_seg == 6)
 	cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -464,7 +458,7 @@ if (w_seg == 6)
 	}
 */
 
-if (w_seg == 8)
+if (w_seg == 7)
 	{
 	cout << "*Segment Kniestück*" << endl << endl;
         cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
@@ -475,7 +469,7 @@ if (w_seg == 8)
 	cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -488,7 +482,7 @@ if (w_seg == 8)
 	pause(); //Siehe Extras.h
 	}
 
-if (w_seg == 9)
+if (w_seg == 8)
 	{
 	cout << "*Segment Kompensator / Dehnungsausgleicher*" << endl << endl;
         cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
@@ -565,7 +559,7 @@ if (w_seg == 9)
 		cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         	cin >> T;
         	T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        	cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        	cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         	cin >> p;
         	p = p * 100000; //Umrechnung Bar zu Pascal
         	Rho = Dichte(T,p);
@@ -579,14 +573,14 @@ if (w_seg == 9)
 	pause(); //Siehe Extras.h
 	}
 
-if (w_seg == 10)
+if (w_seg == 9)
 	{
 	cout << "*Segment Regler / Drosselklappe*" << endl << endl;
         cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
 	cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -606,7 +600,7 @@ if (w_seg == 10)
 	pause(); //Siehe Extras.h
 	}
 
-if (w_seg == 11)
+if (w_seg == 10)
 	{
 	cout << "*Segment gerades Rohr*" << endl << endl;
         cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
@@ -633,7 +627,7 @@ if (w_seg == 11)
 	cin >> l;
 	zeta = lambda * (l / d);
 	T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Druck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -676,9 +670,6 @@ cout << "Volumenstrom 2: " << Vstrom2 << endl;
 cout << "Druckverlust 2: " << pv2 << endl << endl;
 
 cout << "Möchten Sie die Anlagenkennlinie jetzt ausgeben? (y = ja; beliebige Taste = Programm beenden)" << endl << endl;
-//Volumenstromgrenze = (Vstrom1 + (Vstrom1/3));
-//Druckgrenze = (pv1 + (pv1/3));
-//cout << Volumenstromgrenze << " " << Druckgrenze;
 cin >> ans;
 cout << endl << endl;
 

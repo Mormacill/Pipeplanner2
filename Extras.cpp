@@ -9,7 +9,7 @@ cin.get();
 cout << endl << endl;
 }
 
-int Druckcheck(pv)
+int Druckcheck(double pv)
 {
 if (pv <= 0)
 	{
