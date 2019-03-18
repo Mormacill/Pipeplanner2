@@ -64,7 +64,7 @@ double Segment1()
                         {
                         zeta = 0.25;
                         }
-                cout << "Für die Rechnung wird ein Zeta-Wert von " << zeta << " verwendet" << endl << endl;
+                cout << endl << endl << "Für die Rechnung wird ein Zeta-Wert von " << zeta << " verwendet" << endl << endl;
                 }
 
 	if (w_fall == 2 || w_fall == 3)
@@ -79,7 +79,7 @@ double Segment1()
                         {
                         zeta = 0.8;
                         }
-                cout << "Für die Rechnung wird ein Zeta-Wert von " << zeta << " verwendet" << endl << endl;
+                cout << endl << endl << "Für die Rechnung wird ein Zeta-Wert von " << zeta << " verwendet" << endl << endl;
                 }
 
         if (w_fall == 4)

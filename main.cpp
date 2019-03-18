@@ -43,6 +43,7 @@ cin >> Vstrom;
 
 for (i = 0; i < n_seg; i++)
 {
+cout << endl << endl << "-------------------------------------------------" << endl;
 cout << endl << endl << "Wählbare Rohreinbauelemente: " << endl << endl;
 cout << "Siehe Handbuch für genaue Teildefinition!" << endl << endl << endl;
 cout << "1: Rohreinlauf" << endl << endl;
