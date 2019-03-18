@@ -93,7 +93,7 @@ double Segment1()
 
         if (w_fall == 5)
                 {
-                cout << endl << endl << "Bitte geben Sie das Verhältniss vom Einlaufradius zum Rohrdurchmesser R/d an" << endl << endl;
+                cout << endl << endl << "Bitte geben Sie das Verhältnis vom Einlaufradius zum Rohrdurchmesser R/d an" << endl << endl;
                 cin >> Rd;
                 if (Rd <= 0.5)
                         {
