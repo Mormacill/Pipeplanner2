@@ -45,7 +45,7 @@ for (i = 0; i < n_seg; i++)
 {
 cout << endl << endl << "-------------------------------------------------" << endl;
 cout << endl << endl << "Wählbare Rohreinbauelemente: " << endl << endl;
-cout << "Siehe Handbuch für genaue Teildefinition!" << endl << endl << endl;
+cout << "Siehe Handbuch für genaue Teildefinition und weitere Hinweise!" << endl << endl << endl;
 cout << "1: Rohreinlauf" << endl << endl;
 cout << "2: Rohrauslauf" << endl << endl;
 cout << "3: plötzliche Rohrerweiterung" << endl << endl;
