@@ -135,7 +135,7 @@ double Segment2()
         cout << "1: Fall 1" << endl;
         cout << "2: Fall 2" << endl;
         cout << "3: Fall 3" << endl;
-        cout << "4: Fall 4" << endl;
+        cout << "4: Fall 4" << endl << endl;
         cin >> w_fall;
 
         if (w_fall == 1)
@@ -216,12 +216,12 @@ double Segment3()
         cin >> w_individual;
                 if (w_individual == 1)
                         {
-                        cout << "Bitte geben Sie den Eintrittsdurchmesser d1 (m) an" << endl << endl;
+                        cout << endl << "Bitte geben Sie den Eintrittsdurchmesser d1 (m) an" << endl << endl;
                         cin >> d1;
                         cout << endl << endl << "Bitte geben Sie den Austrittsdurchmesser d2 (m) an" << endl << endl;
                         cin >> d2;
                         zeta = pow((1 - pow((d1 / d2),2)),2);
-                        cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+                        cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
                         cin >> T;
                         T = T + 273.15; //Umrechnung Celsius zu Kelvin
                         cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
@@ -235,12 +235,12 @@ double Segment3()
                         }
 		 if (w_individual == 2)
                         {
-                        cout << "Bitte geben Sie den Eintrittsdurchmesser d1 (m) an" << endl << endl;
+                        cout << endl << "Bitte geben Sie den Eintrittsdurchmesser d1 (m) an" << endl << endl;
                         cin >> d1;
                         cout << endl << endl << "Bitte geben Sie den Austrittsdurchmesser d2 (m) an" << endl << endl;
                         cin >> d2;
                         zeta = pow((pow((d2 / d1),2) - 1),2);
-                        cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+                        cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
                         cin >> T;
                         T = T + 273.15; //Umrechnung Celsius zu Kelvin
                         cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
@@ -336,10 +336,10 @@ double Segment5()
         a2 = (M_PI / 4) * pow(d2,2);
         zeta = zeta_kon((a2 / a1));
 
-        cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums am Konfusoraustritt ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -354,10 +354,10 @@ double Segment6()
 {
 	cout << "*Segment plötzliche Rohrverengung*" << endl << endl;
         cout << "\033[0;31mBitte schlagen Sie im Handbuch das entsprechende Kapitel auf!\033[0;37m" << endl << endl;
-        cout << "Bitte geben Sie den Eintrittsdurchmesser (m) des Konfusors ein" << endl << endl;
+        cout << "Bitte geben Sie den Eintrittsdurchmesser (m) der Rohrverengung ein" << endl << endl;
         cin >> d1;
         a1 = (M_PI / 4) * pow(d1,2);
-        cout << endl << endl << "Bitte geben Sie den Austrittssdurchmesser (m) des Konfusors ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Austrittssdurchmesser (m) der Rohrverengung ein" << endl << endl;
         cin >> d2;
         a2 = (M_PI / 4) * pow(d2,2);
         zeta = zeta_plv((a2 / a1));
@@ -365,11 +365,11 @@ double Segment6()
         cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums am Verengungsaustritt ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
-        cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) am Austritt an" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie die Strömungsgeschwindigkeit (m/s) am Verengungsaustritt an" << endl << endl;
         cin >> w;
         pv = p_v (zeta, Rho, w);
         cout << endl << endl << "Der Druckverlust infolge von Reibung für die Rohrverengung beträgt: " << pv << " Pascal" << endl << endl;
@@ -387,7 +387,7 @@ double Segment7()
         cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
         cin >> T;
         T = T + 273.15; //Umrechnung Celsius zu Kelvin
-        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums im Kniestück ein" << endl << endl;
         cin >> p;
         p = p * 100000; //Umrechnung Bar zu Pascal
         Rho = Dichte(T,p);
@@ -472,7 +472,7 @@ double Segment8()
                         zeta = zeta_lyra_well(d);
                         }
 		}
-                cout << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
+                cout << endl << endl << "Bitte geben Sie die Temperatur (Celsius) des Strömungsmediums ein" << endl << endl;
                 cin >> T;
                 T = T + 273.15; //Umrechnung Celsius zu Kelvin
                 cout << endl << endl << "Bitte geben Sie den Gesamtdruck (Bar) des Strömungsmediums ein" << endl << endl;
@@ -502,7 +502,7 @@ double Segment9()
         cout << endl << endl << "Bitte geben Sie den Durchmesser (m) am Eintritt an" << endl << endl;
         cin >> d1;
         a1 = (M_PI / 4) * pow(d1,2);
-        cout << endl << endl << "Bitte geben Sie bei gewünschter Stellung der Drosselklappe die versperrte Fläche an" << endl << endl;
+        cout << endl << endl << "Bitte geben Sie bei gewünschter Stellung der Drosselklappe die versperrte Fläche (m^2) an" << endl << endl;
         cin >> a2;
         a2 = a1 - a2;
         w2 = w1 * (a1 / a2);

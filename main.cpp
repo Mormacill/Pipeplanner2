@@ -61,11 +61,11 @@ cout << "10: gerader Rohrabschnitt" << endl << endl << endl;
 // Programmstart
 if (i == 0)
 	{
-	cout << "Bitte wählen sie Ihr erstes Streckensegment aus!" << endl << endl;
+	cout << "Bitte wählen Sie Ihr erstes Streckensegment aus!" << endl << endl;
 	}
 else
 	{
-	cout << "Bitte wählen sie das nächste Streckensegment aus!" << endl << endl;
+	cout << "Bitte wählen Sie das nächste Streckensegment aus!" << endl << endl;
 	}
 
 cin >> w_seg;
@@ -160,7 +160,7 @@ for (i = 0; i < n_seg; i++)
 	{
 	arraysum = arraysum + Druckarray[i];
 	}
-cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << endl << endl;
+cout << endl << "Die Summe aller Druckverluste pv beträgt: " << arraysum << " Pascal" << endl << endl;
 
 if (k == 0)
 {
